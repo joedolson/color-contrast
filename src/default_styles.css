@@ -1,0 +1,26 @@
+table {margin: 10px auto; background: #fff;border-collapse: collapse; width: 100%;}
+caption {font-weight: 700;text-align: left;font-size: .9em;}
+th {background: #e6e6f6;text-align: left;font-size: .9em;padding: 2px;}
+td {border: 1px solid #ddd;font-size: 1em;padding: 2px 5px;}
+ul li {margin: 2px;}
+form { clear: right; }
+#color_set { border-left: none; border-radius: 0 5px 5px 0; }
+fieldset {border: 1px solid #ddd;background: #fff;margin: 10px 0 0;padding: 0 0 10px;}
+legend {font-weight: 700;background: #eee;border: 1px solid #aaa;padding: 2px 10px; margin-left: 10px; border-radius: 4px; text-shadow: 1px 1px 2px #ccc; }
+.error {border: 2px solid #a00;padding: 2px 10px;background: #ffc;font-size: .9em;margin: 10px 2px;}
+.contrast-form { position: relative; }
+#color_granularity, #color_set {width: 48%;}
+#color_granularity { position: absolute; right: 0; top: 0; }
+#color_set {float: left;}
+.left, .right {width: 49%;}
+.views p {padding: 5px;}
+.right {float: right;}
+.large {font-size: 1.6em;}
+.small {font-size: .7em;}
+.announce {text-align: center;font-size: 1.8em;background: #ffc;}
+.fail {color: #a00;border: 2px solid #800;}
+.pass {color: #0a0;border: 2px solid #080;}
+.partial {color: #00a;border: 2px solid #008;}
+strong {color: #b22;}
+.stats {margin: 0;padding: 5px;border: 1px solid #ddf;background: #fff;color: #118;}
+table code, table samp { font-size: 1.4em; }
