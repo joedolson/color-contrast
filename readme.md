@@ -2,7 +2,7 @@
 
 Color Contrast Testing Tools by Joe Dolson.
 
-![PHP tests](https://github.com/Player-Pursuits/player-pursuits-plugin/workflows/PHP%20tests/badge.svg)
+![PHP tests](https://github.com/joedolson/color-contrast/workflows/PHP%20tests/badge.svg)
 
 ## Color Contrast Tools
 
