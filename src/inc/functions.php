@@ -1,5 +1,19 @@
 <?php
 
+/**
+ * Test the relative contrast of two colors per the WCAG 2.0 color contrast specifications.
+ *
+ * @see https://www.w3.org/TR/WCAG20/#relativeluminancedef
+ *
+ * @param int $r Numeric red value between 0 and 255 for foreground color.
+ * @param int $r2 Numeric red value between 0 and 255 for background color.
+ * @param int $g Numeric green value between 0 and 255 for foreground color.
+ * @param int $g2 Numeric green value between 0 and 255 for background color.
+ * @param int $b Numeric blue value between 0 and 255 for foreground color.
+ * @param int $b2 Numeric blue value between 0 and 255 for background color.
+ *
+ * @return float
+ */
 function luminosity( $r,$r2,$g,$g2,$b,$b2 ) {
 	$r  = (int) $r;
 	$r2 = (int) $r2;
@@ -34,6 +48,15 @@ function luminosity( $r,$r2,$g,$g2,$b,$b2 ) {
 	return $luminosity;
 }
 
+/**
+ * Convert an RGB color value to a hexadecimal code.
+ *
+ * @param int|array $r integer value for red or array of values containing r,g,b values.
+ * @param int       $g green value.
+ * @param int       $b blue value.
+ *
+ * @return string
+ */
 function rgb2hex($r, $g=-1, $b=-1) {
 	if ( is_array( $r ) && sizeof( $r ) == 3 ) {
 		list( $r, $g, $b ) = $r;
@@ -52,22 +75,38 @@ function rgb2hex($r, $g=-1, $b=-1) {
 	return '#'.$color;
 }
 
-/*
-formula: real = alpha * fore + ( 1 - alpha ) * back;
-example: real = .55 * 255 + ( 1 - .55 ) * 0;
-Blend foreground and background using alpha value
-*/
+/**
+ * Blend two colors based on alpha transparency defined on the foreground color.
+ *
+ * formula: real = alpha * fore + ( 1 - alpha ) * back;
+ *
+ * @param array $fore Array of RGB values for foreround color.
+ * @param array $back Array of RGB values for background color.
+ * @param float $alpha Alpha transparency between 0 and 1.
+ *
+ * @return array
+ */
 function blend( $fore, $back, $alpha ) {
 	for( $i = 0; $i < 3; $i++ ) {
-		// must be an integer for RGB!
-		$alpha = (float) $alph;
-		$f     = (float) ( isset( $fore[$i] ) ? $fore[$i] : 0 );
-		$b     = (float) ( isset( $back[$i] ) ? $back[$i] : 0 );
+		// must be an integer for RGB! // Then why am I casting this to a float?
+		$alpha   = (float) $alpha;
+		$f       = (float) ( isset( $fore[$i] ) ? $fore[$i] : 0 );
+		$b       = (float) ( isset( $back[$i] ) ? $back[$i] : 0 );
 		$blend[] = round( ( $alpha * $f + ( 1 - $alpha ) * $b ), 0 );
 	}
+
 	return $blend;
 }
 
+/**
+ * Convert an HSL value to an RGB value.
+ *
+ * @param int $h Hue.
+ * @param int $s Saturation.
+ * @param int $l Lightness.
+ *
+ * @return array
+ */
 function hsl2rgb( $h, $s, $l ) {
 	$r; 
 	$g; 
@@ -110,9 +149,16 @@ function hsl2rgb( $h, $s, $l ) {
 	$g = ( $g + $m ) * 255;
 	$b = ( $b + $m  ) * 255;
 
-    return array( floor( $r ), floor( $g ), floor( $b ) );
+	return array( floor( $r ), floor( $g ), floor( $b ) );
 }
 
+/**
+ * Convert a hexadecimal value to RGB.
+ *
+ * @param string $color Hexadecimal color code with or without '#'.
+ *
+ * @return array
+ */
 function hex2rgb($color) {
 	$color = str_replace('#', '', $color);
 	if ( strlen($color) != 6 ) { 
