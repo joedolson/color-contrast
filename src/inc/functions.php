@@ -171,3 +171,42 @@ function hex2rgb($color) {
 
 	return $rgb;
 }
+
+/**
+ * Convert a hex value to its inverse.
+ *
+ * @param string $color Hex value.
+ *
+ * @return string
+ */
+function hex_to_inverse( $color ) {
+    $color   = trim( $color );
+	// Return same format as given.
+    $prepend = false;
+    if ( strpos( $color, '#' ) !== false ) {
+        $prepend = true;
+        $color   = str_replace( '#', '', $color );
+    }
+    $len = strlen( $color );
+    if( $len == 3 || $len == 6 ){
+        if( $len == 3 ) {
+			$color = preg_replace( '/(.)(.)(.)/', "\\1\\1\\2\\2\\3\\3", $color );
+		}
+    } else {
+		// Return original color on error.
+        return ( $prepend ? '#' : '' ) . $color;
+    }
+    if ( ! preg_match( '/^[a-f0-9]{6}$/i', $color ) ) {
+		// Return original color on error.
+       return ( $prepend ? '#' : '' ) . $color;
+    }
+
+    $r = dechex( 255 - hexdec( substr( $color, 0, 2 ) ) );
+    $r = ( strlen( $r ) > 1 ) ? $r : '0' . $r;
+    $g = dechex( 255 - hexdec( substr( $color, 2, 2 ) ) );
+    $g = ( strlen( $g ) > 1 ) ? $g : '0' . $g;
+    $b = dechex( 255 - hexdec( substr( $color, 4, 2 ) ) );
+    $b = ( strlen( $b ) > 1 ) ? $b : '0' . $b;
+
+    return ( $prepend ? '#' : '' ) . $r . $g . $b;
+}
